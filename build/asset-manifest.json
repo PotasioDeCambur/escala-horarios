@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/escala-horarios/static/css/main.f4de13ab.css",
+    "main.js": "/escala-horarios/static/js/main.8d1332c2.js",
+    "index.html": "/escala-horarios/index.html",
+    "main.f4de13ab.css.map": "/escala-horarios/static/css/main.f4de13ab.css.map",
+    "main.8d1332c2.js.map": "/escala-horarios/static/js/main.8d1332c2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f4de13ab.css",
+    "static/js/main.8d1332c2.js"
+  ]
+}
