@@ -8,15 +8,21 @@ Uma aplicação web moderna para gerenciar escalas de horários de trabalho, des
 - 🎨 **Design responsivo** que funciona no celular
 - 📈 **Estatísticas automáticas** (dias, folgas, funcionários)
 - 🟡 **Destaque visual** para folgas (linhas amarelas)
+- 🔴 **Destaque para feriados** (linhas vermelhas)
 - 📱 **Interface moderna** e intuitiva
-- 🎯 **Dados baseados** na planilha Excel real
+- 🎊 **Detecção automática** de feriados brasileiros
+- 📄 **Exportação para PDF e Excel**
+- ✏️ **Edição de nomes** de funcionários
+- ↩️ **Sistema de desfazer** contextual
+- 📅 **Seleção de mês/ano** dinâmica
 
 ## 🛠️ Tecnologias
 
 - **React 18** - Framework principal
 - **TypeScript** - Tipagem estática
 - **CSS Moderno** - Estilos responsivos
-- **Dados reais** - Baseados na escala de julho 2024
+- **html2canvas + jsPDF** - Exportação PDF
+- **xlsx** - Exportação Excel
 
 ## 📋 Pré-requisitos
 
@@ -46,9 +52,66 @@ npm start
 http://localhost:3000
 ```
 
+## 🚀 Deploy para Produção
+
+### **Build para Produção:**
+```bash
+npm run build
+```
+
+### **Opções de Hospedagem:**
+
+#### **1. Vercel (Recomendado - Gratuito)**
+```bash
+npm install -g vercel
+vercel
+```
+
+#### **2. Netlify (Gratuito)**
+- Arraste a pasta `build` para o Netlify
+- Ou conecte com GitHub
+
+#### **3. GitHub Pages**
+```bash
+npm run deploy
+```
+
+#### **4. Servidor Próprio**
+- Copie a pasta `build` para seu servidor web
+- Configure para servir arquivos estáticos
+
+## 💰 Comercialização
+
+### **Modelos de Negócio Recomendados:**
+
+#### **Opção A: Licença Perpetua**
+- **Preço único** por cliente
+- **Link personalizado** para cada empresa
+- **Sem mensalidade**
+- **Ideal para pequenas empresas**
+
+#### **Opção B: Assinatura Mensal**
+- **Pagamento recorrente**
+- **Atualizações incluídas**
+- **Suporte técnico**
+- **Múltiplos usuários**
+
+#### **Opção C: Freemium**
+- **Versão gratuita** limitada
+- **Versão premium** paga
+- **Recursos avançados** desbloqueados
+
+### **Vantagens para Clientes:**
+- ✅ **Zero instalação** - Só abrir no navegador
+- ✅ **Funciona em qualquer computador** - Até os mais antigos
+- ✅ **Sem atualizações** - Sempre atualizado
+- ✅ **Acesso via celular** - Interface responsiva
+- ✅ **Dados seguros** - Armazenamento local
+- ✅ **Exportação fácil** - PDF e Excel
+
 ## 📊 Dados Incluídos
 
-A aplicação já vem com todos os dados da escala de julho 2024:
+A aplicação já vem com funcionários padrão:
 
 ### **Funcionários:**
 - FILIPE
@@ -67,13 +130,17 @@ A aplicação já vem com todos os dados da escala de julho 2024:
 - 13H AS 22H
 - 16H AS 22H
 - FOLGA
+- FERIADO
 
 ## 🎯 Como Usar
 
 1. **Visualizar escala:** A tabela mostra todos os horários do mês
 2. **Ver estatísticas:** Cards no topo mostram resumos importantes
 3. **Identificar folgas:** Linhas amarelas destacam dias com folgas
-4. **Navegar:** A tabela é responsiva e funciona no celular
+4. **Identificar feriados:** Linhas vermelhas destacam feriados
+5. **Editar horários:** Clique em "Editar" para modificar
+6. **Exportar:** Use os botões para PDF ou Excel
+7. **Navegar:** A tabela é responsiva e funciona no celular
 
 ## 📱 Responsividade
 
@@ -81,17 +148,16 @@ A aplicação funciona perfeitamente em:
 - ✅ Desktop
 - ✅ Tablet
 - ✅ Celular
+- ✅ Computadores antigos ("tostadoras")
 
 ## 🔮 Próximas Funcionalidades
 
-- [ ] Edição de horários (clique para alterar)
-- [ ] Exportação para PDF/Excel
-- [ ] Filtros por funcionário
-- [ ] Cálculo de horas trabalhadas
-- [ ] Validação de conflitos
-- [ ] Salvar no localStorage
-- [ ] Múltiplos meses
+- [ ] Múltiplas escalas
 - [ ] Sistema de login
+- [ ] Backup na nuvem
+- [ ] Notificações
+- [ ] Relatórios avançados
+- [ ] Integração com sistemas externos
 
 ## 🤝 Como Contribuir
 
@@ -109,8 +175,8 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 **Armando Linares**
 - Desenvolvido para otimizar a gestão de escalas de horários
-- Baseado em planilha Excel real
 - Interface moderna e intuitiva
+- Pronto para comercialização
 
 ## 📞 Suporte
 
