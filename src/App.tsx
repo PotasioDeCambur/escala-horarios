@@ -462,18 +462,18 @@ function App() {
 
     // Configurações de fonte
     pdf.setFont('helvetica', 'bold');
-    pdf.setFontSize(14);
+    pdf.setFontSize(12); // Fonte do título reduzida de 14 para 12
 
-    // Título principal (maior e mais visível)
+    // Título principal (menor e mais compacto)
     const title = `ESCALA - ${getNomeMes(mesAtual).toUpperCase()} ${anoAtual}`;
     const titleWidth = pdf.getTextWidth(title);
     const titleX = (pageWidth - titleWidth) / 2;
-    pdf.text(title, titleX, margin + 8);
+    pdf.text(title, titleX, margin + 6); // Espaçamento reduzido de 8 para 6
 
     // Configurações da tabela otimizadas para melhor uso do espaço
     pdf.setFontSize(9); // Fonte maior para melhor visibilidade
-    const tableStartY = margin + 12;
-    const rowHeight = 5.2; // Altura otimizada para caber 31 dias
+    const tableStartY = margin + 10; // Espaçamento reduzido de 12 para 10
+    const rowHeight = 5.5; // Altura otimizada para caber 31 dias mantendo boa visibilidade
     const colWidth = usableWidth / (funcionarios.length + 1); // +1 para a coluna de data
 
     // Cabeçalho da tabela
@@ -485,13 +485,18 @@ function App() {
     pdf.setFont('helvetica', 'bold');
     pdf.setFontSize(10); // Fonte maior para cabeçalhos
     
-    // Cabeçalho da coluna DATA
-    pdf.text('DATA', margin + 5, tableStartY + 3);
+    // Cabeçalho da coluna DATA - centralizado
+    const dataHeaderText = 'DATA';
+    const dataHeaderWidth = pdf.getTextWidth(dataHeaderText);
+    const dataHeaderX = margin + (colWidth - dataHeaderWidth) / 2;
+    pdf.text(dataHeaderText, dataHeaderX, tableStartY + (rowHeight / 2) + 1);
     
-    // Cabeçalhos dos funcionários
+    // Cabeçalhos dos funcionários - centralizados
     funcionarios.forEach((func, index) => {
-      const x = margin + colWidth * (index + 1) + 5;
-      pdf.text(func.nome, x, tableStartY + 3);
+      const cellX = margin + colWidth * (index + 1);
+      const textWidth = pdf.getTextWidth(func.nome);
+      const textX = cellX + (colWidth - textWidth) / 2;
+      pdf.text(func.nome, textX, tableStartY + (rowHeight / 2) + 1);
     });
 
     // Dados da tabela
@@ -511,11 +516,20 @@ function App() {
         pdf.setTextColor(255, 255, 255);
         pdf.setFont('helvetica', 'bold');
         pdf.setFontSize(10);
-        pdf.text('DATA', margin + 5, margin + 3);
+        
+        // Cabeçalho da coluna DATA na nova página - centralizado
+        const dataHeaderWidth = pdf.getTextWidth('DATA');
+        const dataHeaderX = margin + (colWidth - dataHeaderWidth) / 2;
+        pdf.text('DATA', dataHeaderX, margin + (rowHeight / 2) + 1);
+        
+        // Cabeçalhos dos funcionários na nova página - centralizados
         funcionarios.forEach((func, index) => {
-          const x = margin + colWidth * (index + 1) + 5;
-          pdf.text(func.nome, x, margin + 3);
+          const cellX = margin + colWidth * (index + 1);
+          const textWidth = pdf.getTextWidth(func.nome);
+          const textX = cellX + (colWidth - textWidth) / 2;
+          pdf.text(func.nome, textX, margin + (rowHeight / 2) + 1);
         });
+        
         pdf.setTextColor(0, 0, 0);
         pdf.setFont('helvetica', 'bold');
         pdf.setFontSize(9);
@@ -527,23 +541,25 @@ function App() {
         pdf.rect(margin, y, usableWidth, rowHeight, 'F');
       }
 
-      // Coluna de data
+      // Coluna de data - centralizada
       const dataText = `${data} (${diaSemana})`;
-      pdf.text(dataText, margin + 5, y + 3);
+      const dataTextWidth = pdf.getTextWidth(dataText);
+      const dataTextX = margin + (colWidth - dataTextWidth) / 2;
+      pdf.text(dataText, dataTextX, y + (rowHeight / 2) + 1);
 
-      // Dados dos funcionários
+      // Dados dos funcionários - centralizados
       funcionarios.forEach((func, colIndex) => {
-        const x = margin + colWidth * (colIndex + 1) + 5;
+        const cellX = margin + colWidth * (colIndex + 1);
         const horario = getHorarioFuncionario(dia, func.id);
         
         // Cor de fundo para folgas e feriados
         if (horario === 'FOLGA') {
           pdf.setFillColor(255, 234, 167);
-          pdf.rect(margin + colWidth * (colIndex + 1), y, colWidth, rowHeight, 'F');
+          pdf.rect(cellX, y, colWidth, rowHeight, 'F');
           pdf.setFont('helvetica', 'bold');
         } else if (horario === 'FERIADO' || isFeriado(data)) {
           pdf.setFillColor(255, 235, 238);
-          pdf.rect(margin + colWidth * (colIndex + 1), y, colWidth, rowHeight, 'F');
+          pdf.rect(cellX, y, colWidth, rowHeight, 'F');
           pdf.setTextColor(211, 47, 47);
           pdf.setFont('helvetica', 'bold');
         } else {
@@ -553,7 +569,9 @@ function App() {
 
         // Mostra "FERIADO" automaticamente se for feriado nacional
         const displayText = isFeriado(data) ? 'FERIADO' : (horario || '');
-        pdf.text(displayText, x, y + 3);
+        const textWidth = pdf.getTextWidth(displayText);
+        const textX = cellX + (colWidth - textWidth) / 2;
+        pdf.text(displayText, textX, y + (rowHeight / 2) + 1);
       });
     });
 
